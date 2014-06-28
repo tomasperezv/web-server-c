@@ -9,6 +9,7 @@ A web-server implemented in C
 make clean
 make
 ./build/server
+Server listening on 3000
 ```
 
 ### Configuration
