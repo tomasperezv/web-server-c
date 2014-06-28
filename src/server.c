@@ -75,6 +75,8 @@ int main(int argc, char *argv[]) {
 
   listen(listenfd, 10);
 
+  printf("Server listening on %s", configuration[0]);
+
   while(1) {
     connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
     ticks = time(NULL);
