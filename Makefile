@@ -1,5 +1,5 @@
 CC = gcc
-FILES = src/server.c src/configuration.c src/hash_table.c
+FILES = src/server.c src/configuration.c src/hash_map.c
 OUT_FOLDER = bin/
 OUT_EXE = server
 
