@@ -54,9 +54,16 @@ int main(int argc, char *argv[]) {
   while(1) {
     connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
     ticks = time(NULL);
-    snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
-    write(connfd, sendBuff, strlen(sendBuff));
 
+    char current_line[MAX_LEN];
+    FILE *file = fopen ("www/404.html", "r");
+    if (file != NULL) {
+      while(fgets(current_line, sizeof(current_line), file) != NULL) {
+        write(connfd, current_line, strlen(current_line));
+      }
+    }
+
+    fclose(file);
     close(connfd);
     sleep(1);
   }
