@@ -3,6 +3,8 @@ FILES = src/server.c src/configuration.c
 OUT_FOLDER = bin/
 OUT_EXE = server
 
+default: rebuild run
+
 build: $(FILES)
 	mkdir $(OUT_FOLDER)
 	# Copy the configuration files

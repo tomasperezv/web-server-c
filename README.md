@@ -6,7 +6,7 @@ A web-server implemented in C
 ### Build and run (Unix based systems)
 
 ```bash
-make rebuild && make launch
+make
 Server listening on 3000
 ```
 
