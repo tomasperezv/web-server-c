@@ -6,6 +6,7 @@
  */
 
 #include "base.h"
+#define DELIM "="
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
