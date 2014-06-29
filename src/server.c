@@ -6,6 +6,7 @@
  */
 
 #include "base.h"
+#include "server.h"
 #include "hash_map.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -17,6 +18,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 /*
  * @method main
@@ -29,7 +31,6 @@ int main(int argc, char *argv[]) {
   struct sockaddr_in serv_addr;
 
   char sendBuff[1025];
-  time_t ticks;
 
   char *port = config_get("port");
   if (port == NULL) {
@@ -53,15 +54,24 @@ int main(int argc, char *argv[]) {
 
   while(1) {
     connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
-    ticks = time(NULL);
+
+    int i;
+    char buffer[2048];
+    read(connfd, buffer, 2048);
 
     char current_line[MAX_LEN];
+    for (i = 0; i < sizeof(connection_headers); i++) {
+      write(connfd, connection_headers[i], strlen(connection_headers[i]));
+    }
+
     FILE *file = fopen ("www/404.html", "r");
     if (file != NULL) {
       while(fgets(current_line, sizeof(current_line), file) != NULL) {
         write(connfd, current_line, strlen(current_line));
       }
     }
+
+    read(connfd, buffer, 2048);
 
     fclose(file);
     close(connfd);
