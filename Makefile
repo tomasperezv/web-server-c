@@ -1,5 +1,5 @@
 CC = gcc
-FILES = src/server.c
+FILES = src/server.c src/configuration.c
 OUT_FOLDER = bin/
 OUT_EXE = server
 
