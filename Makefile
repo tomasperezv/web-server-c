@@ -9,7 +9,9 @@ build: $(FILES)
 	mkdir $(OUT_FOLDER)
 	# Copy the configuration files
 	mkdir $(OUT_FOLDER)/config
+	mkdir $(OUT_FOLDER)/www
 	cp src/config/*.conf $(OUT_FOLDER)config/
+	cp www/*.html $(OUT_FOLDER)www/
 	$(CC) -o $(OUT_FOLDER)$(OUT_EXE) $(FILES)
 
 clean:
