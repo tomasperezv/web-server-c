@@ -14,4 +14,7 @@ clean:
 	rm -fr $(OUT_FOLDER)
 	rm -f *.o core
 
+run:
+	./$(OUT_FOLDER)/server
+
 rebuild: clean build
