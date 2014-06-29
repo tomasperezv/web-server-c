@@ -9,7 +9,7 @@ build: $(FILES)
 	mkdir $(OUT_FOLDER)
 	# Copy the configuration files
 	mkdir $(OUT_FOLDER)/config
-	cp src/config/*.conf $(OUT_FOLDER)/config/
+	cp src/config/*.conf $(OUT_FOLDER)config/
 	$(CC) -o $(OUT_FOLDER)$(OUT_EXE) $(FILES)
 
 clean:
@@ -17,6 +17,6 @@ clean:
 	rm -f *.o core
 
 run:
-	./$(OUT_FOLDER)/server
+	./$(OUT_FOLDER)server
 
 rebuild: clean build
