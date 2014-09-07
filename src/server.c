@@ -19,6 +19,17 @@
 #include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
+#include <signal.h>
+
+int listenfd;
+
+/*
+ * @method interruption_handler
+ */
+void interruption_handler(int signal) {
+  shutdown(listenfd, 2);
+  exit(1);
+}
 
 /*
  * @method main
@@ -27,10 +38,12 @@ int main(int argc, char *argv[]) {
 
   read_config(FILENAME);
 
-  int listenfd = 0, connfd = 0;
+  int connfd = 0;
   struct sockaddr_in serv_addr;
 
   char sendBuff[1025];
+
+  signal(SIGINT, interruption_handler);
 
   char *port = config_get("port");
   if (port == NULL) {
@@ -60,7 +73,7 @@ int main(int argc, char *argv[]) {
     read(connfd, buffer, 2048);
 
     char current_line[MAX_LEN];
-    for (i = 0; i < sizeof(connection_headers); i++) {
+    for (i = 0; i < 5; i++) {
       write(connfd, connection_headers[i], strlen(connection_headers[i]));
     }
 
@@ -71,11 +84,11 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    read(connfd, buffer, 2048);
-
     fclose(file);
     close(connfd);
     sleep(1);
   }
+
+  close(listenfd);
 
 }
