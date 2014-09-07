@@ -5,7 +5,7 @@ OUT_EXE = server
 
 default: rebuild run
 
-build: $(FILES)
+build:
 	mkdir $(OUT_FOLDER)
 	# Copy the configuration files
 	mkdir $(OUT_FOLDER)/config
@@ -13,6 +13,16 @@ build: $(FILES)
 	cp src/config/*.conf $(OUT_FOLDER)config/
 	cp www/*.html $(OUT_FOLDER)www/
 	$(CC) -o $(OUT_FOLDER)$(OUT_EXE) $(FILES)
+
+debug: clean
+	mkdir $(OUT_FOLDER)
+	# Copy the configuration files
+	mkdir $(OUT_FOLDER)/config
+	mkdir $(OUT_FOLDER)/www
+	cp src/config/*.conf $(OUT_FOLDER)config/
+	cp www/*.html $(OUT_FOLDER)www/
+	$(CC) -o $(OUT_FOLDER)$(OUT_EXE) -g $(FILES)
+	gdb ./$(OUT_FOLDER)server
 
 clean:
 	rm -fr $(OUT_FOLDER)
