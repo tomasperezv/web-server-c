@@ -61,6 +61,7 @@ int main(int argc, char *argv[]) {
 
   if (bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1) {
     close(listenfd);
+    return -1;
   }
 
   listen(listenfd, 10);
